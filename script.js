@@ -1,4 +1,4 @@
-let addMessage = document.querySelector('.message'), addButton = document.querySelector('.add');
+let addMessage = document.querySelector('.message'), addButton = document.querySelector('.add'),
 //cм. 5
 todo = document.querySelector('.todo');
 
