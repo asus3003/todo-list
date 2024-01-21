@@ -1,69 +1,93 @@
-let addMessage = document.querySelector('.message'),
-addButton = document.querySelector('.add'),
-todo = document.querySelector('.todo');
-
+let formInputEl = document.querySelector('.form-input'),
+    formButtonEl = document.querySelector('.form-button'),
+    todoListEl = document.querySelector('.todo-list');
+const name = 'todo';
 let todoList = [];
 
-if(localStorage.getItem('todo')){
+checkLocalStorage(name);
 
-    todoList = JSON.parse(localStorage.getItem('todo'));
-    displayMessages();
+formButtonEl.addEventListener('click', () => onSubmit(name));
+
+formInputEl.addEventListener('keypress', onEnter);
+
+todoListEl.addEventListener('change', changeTodoList);
+
+todoListEl.addEventListener('contextmenu', contextTodoList);
+
+function checkLocalStorage(todoName) {
+
+    if (localStorage.getItem(todoName)) {
+
+        todoList = JSON.parse(localStorage.getItem(todoName));
+        displayMessages();
+    }
 }
 
-addButton.addEventListener('click', function (){
-    if(!addMessage.value) return;
+function onEnter(e) {
+    console.log('key',e.key);
+    if (e.key === 'Enter') {
+        onSubmit(name);
+    }
+}
+
+function onSubmit(todoName) {
+    if (!formInputEl.value) return;
+
 
     let newTodo = {
-        todo:addMessage.value,
+        todo: formInputEl.value,
         checked: false,
         important: false
-};
+    };
 
-todoList.push(newTodo);
+    todoList.push(newTodo);
     displayMessages();
-    localStorage.setItem('todo', JSON.stringify(todoList));
-    addMessage.value ='';
-});
+    localStorage.setItem(todoName, JSON.stringify(todoList));
+    formInputEl.value = '';
+}
 
-function displayMessages(){
+/**
+ * отображение сообщений
+ */
+function displayMessages() {
     let displayMessage = '';
-    if (todoList.length === 0) todo.innerHTML = '';
-    todoList.forEach(function(item, i){
+    if (todoList.length === 0) todoListEl.innerHTML = '';
+    todoList.forEach(function (item, i) {
         displayMessage += `
         <li>
         <input type='checkbox' id='item_${i}'${item.checked ? 'checked' : ''}>
         <label for='item_${i}' class="${item.important ? 'important' : ''}">${item.todo}</label>
         </li>
         `;
-    // теперь выводим на страницу что получилось
-    todo.innerHTML = displayMessage;
-});
+        // теперь выводим на страницу что получилось
+        todoListEl.innerHTML = displayMessage;
+    });
 }
 
-todo.addEventListener('change',function(event){
+function changeTodoList(event) {
     let idInput = event.target.getAttribute('id');
-    let forLabel = todo.querySelector('[for=' + idInput +']');
+    let forLabel = todoListEl.querySelector('[for=' + idInput + ']');
     let valueLabel = forLabel.innerHTML;
-    todoList.forEach(function(item){
-        if (item.todo === valueLabel){
+    todoList.forEach(function (item) {
+        if (item.todo === valueLabel) {
             item.checked = !item.checked;
             localStorage.setItem('todo', JSON.stringify(todoList));
         }
     });
-});
+}
 
-todo.addEventListener('contextmenu', function(event){
+function contextTodoList(event) {
     event.preventDefault();
-    todoList.forEach(function(item, i){
-        if (item.todo === event.target.innerHTML){
-            if(event.ctrlKey || event.metaKey){
-                todoList.splice(i,1);
+    todoList.forEach(function (item, i) {
+        if (item.todo === event.target.innerHTML) {
+            if (event.ctrlKey || event.metaKey) {
+                todoList.splice(i, 1);
             } else {
-            item.important = !item.important;
+                item.important = !item.important;
             }
             displayMessages();
             localStorage.setItem('todo', JSON.stringify(todoList));
         }
 
     });
-});
+}

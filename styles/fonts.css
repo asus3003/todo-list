@@ -1,0 +1,9 @@
+body {
+    /*основной цвет фона страницы*/
+    background-color: var(--page-background-color);
+    /* TODO: добавить файл шрифтов*/
+    font-family:  "Roboto Thin", sans-serif;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
