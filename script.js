@@ -1,4 +1,5 @@
 let formInputEl = document.querySelector('.form-input'),
+    formEl = document.querySelector('form'),
     formButtonEl = document.querySelector('.form-button'),
     todoListEl = document.querySelector('.todo-list');
 const name = 'todo';
@@ -6,13 +7,23 @@ let todoList = [];
 
 checkLocalStorage(name);
 
+ //formEl.addEventListener('keypress', clearDefault);
+
 formButtonEl.addEventListener('click', () => onSubmit(name));
 
-formInputEl.addEventListener('keypress', onEnter);
+formInputEl.addEventListener('keydown', onEnter);
 
 todoListEl.addEventListener('change', changeTodoList);
 
 todoListEl.addEventListener('contextmenu', contextTodoList);
+
+
+/*
+function clearDefault(e) {
+    console.log(e);
+   e.preventDefault();
+
+}*/
 
 function checkLocalStorage(todoName) {
 
@@ -24,8 +35,8 @@ function checkLocalStorage(todoName) {
 }
 
 function onEnter(e) {
-    console.log('key',e.key);
-    if (e.key === 'Enter') {
+    console.log('key',e);
+    if (e.ctrlKey || e.metaKey) {
         onSubmit(name);
     }
 }
@@ -91,3 +102,4 @@ function contextTodoList(event) {
 
     });
 }
+
