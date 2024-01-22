@@ -15,8 +15,6 @@ li {
 body {
     /*основной цвет фона страницы*/
     background-color: var(--page-background-color);
-    /* TODO: добавить файл шрифтов*/
-    font-family:  "Roboto Thin", sans-serif;
     box-sizing: border-box;
 }
 

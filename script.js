@@ -35,8 +35,8 @@ function checkLocalStorage(todoName) {
 }
 
 function onEnter(e) {
-    console.log('key',e);
-    if (e.ctrlKey || e.metaKey) {
+   // console.log('key',e);
+    if (e.ctrlKey || e.metaKey || e.key === 'Enter') {
         onSubmit(name);
     }
 }
