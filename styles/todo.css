@@ -1,17 +1,20 @@
 .container {
     margin: 0 auto;
     padding-top: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
 
 .wrapper {
-    max-width: 400px;
+    min-width: 400px;
     display: block;
     margin: 0 auto 40px;
     background-color: var(--wrapper-background-color);
     padding: 30px;
     border-radius: 10px;
-    -webkit-box-shadow: 0 2px 10px 0 #074b83;
-    box-shadow: 0 2px 10px 0 #074b83;
+    box-shadow: 0 2px 10px 0 #181a1c;
 
 }
 
@@ -19,8 +22,9 @@ h1 {
     text-align: center;
     margin-top: 0;
     margin-bottom: 20px;
-    color: #fff;
+    color: var(--h1-text-color);
     font-size: 30px;
+
 }
 
 form {
@@ -54,11 +58,11 @@ input[type=checkbox], label {
 
 input[type=checkbox] + label:before {
     content: '';
-    background: #1BA39C;
+    background: var(--checkbox-background-unchecked);
     border-radius: 5px;
     border: 2px solid #ddd;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: center;
     width: 10px;
     height: 10px;
     padding: 2px;
@@ -69,13 +73,13 @@ input[type=checkbox] + label:before {
 input[type=checkbox]:checked + label:before {
     content: "";
     display: inline-block;
-    width: 1px;
+    background-color: var(--checkbox-background-checked);
+    width: 3px;
     height: 5px;
-    border:2px dashed red;
+    border:3px solid black;
     border-width: 0 3px 3px 0;
     /*TODO: поиграться с анимацией в CSS*/
     transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     border-radius: 0;
     margin: 0 15px 5px 5px;
@@ -111,3 +115,8 @@ button:hover {
 
 }
 
+label {
+    display: flex;
+    align-items: center;
+
+}

@@ -2,7 +2,6 @@
 body {
     /* TODO: добавить файл шрифтов*/
     font-family:  "Roboto Thin", sans-serif;
-    -webkit-box-sizing: content-box;
-    box-sizing: content-box;
+    /*box-sizing: content-box;*/
 }
 
